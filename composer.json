@@ -1,0 +1,13 @@
+{
+  "name": "tostrander/328/328mMidterm",
+  "authors": [
+    {
+      "name": "Qinghang Zhang",
+      "email": "tostrander@greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+
+}
