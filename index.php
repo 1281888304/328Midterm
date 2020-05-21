@@ -10,7 +10,7 @@ session_start();
 
 //Require the autoload file
 require_once("vendor/autoload.php");
-
+require_once("model/validate.php");
 
 //Instantiate the F3 Base class
 $f3 = Base::instance();
@@ -23,14 +23,28 @@ $f3->route('GET /', function () {
     echo $view->render('views/home.html');
 });
 $f3->route('GET|POST /survery', function () use ($f3) {
+    $boxs=array("nice for it","like midterm");
     //echo '<h1>Welcome to my Food Page</h1>';
-    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $_SESSION['name'] = $_POST['name'];
-        $_SESSION['like'] = $_POST['like'];
-        $_SESSION['good'] = $_POST['good'];
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (!validName($_POST['name'])) {
 
-        $f3->reroute('summary');
+            //Set an error variable in the F3 hive
+            $f3->set('errors["name"]', "cant be empty");
+        }
+
+//        if (!validBox($_POST['boxs[]'])){
+//
+//            $f3->set('errors["boxs"]', "must choose one");
+//
+//        }
+
+        if (empty($f3->get('errors'))) {
+            $_SESSION['name'] = $_POST['name'];
+            $_SESSION['boxs'] = $_POST['boxs'];
+            $f3->reroute('summary');
+        }
     }
+    $f3->set('boxs',$boxs);
     $view = new Template();
     echo $view->render('views/survery.html');
 });
@@ -40,8 +54,6 @@ $f3->route('GET|POST /summary', function () {
     $view = new Template();
     echo $view->render('views/summary.html');
 });
-
-
 
 
 //Order route
