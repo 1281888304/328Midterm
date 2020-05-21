@@ -20,7 +20,7 @@
             <label for="name" class="col-sm-2 control-label">Name:</label>
 
             <div class="col-sm-4">
-                <input class="form-control" type="text" name="name" id="name">
+                <input class="form-control" type="text" name="name" id="name" value="{{@name}}">
             </div>
             <span class="err">
                         <check if="{{ isset(@errors['name']) }}">
@@ -30,20 +30,37 @@
         </div>
 
 
+<!--        <div class="form-group">-->
+
+<!--            <label class="control-label">How do you feel:</label>-->
+<!--            <repeat group="{{@boxs}}" value="{{@box}}">-->
+<!--                <div class="form-check">-->
+<!--                    <input type="checkbox" class="form-check-input" id="{{@box}}"-->
+<!--                    name="boxs[]" value="{{@box}}">-->
+<!--                    <label class="form-check-label" for="{{@box}}">{{@box}}</label>-->
+<!--                </div>-->
+
+<!--            </repeat>-->
+<!--            <span class="err">-->
+<!--                        <check if="{{ isset(@errors['boxs']) }}">-->
+<!--                            {{ @errors['boxs'] }}-->
+<!--                        </check>-->
+<!--                    </span>-->
+<!--        </div>-->
         <div class="form-group">
+            <p>How do you feel?</p>
+            <input type="checkbox" class="form-check-input" id="nice" name="nice" value="nice">
+            <label class="form-check-label" for="nice">nice</label>
+            <br>
+            <input type="checkbox" class="form-check-input" id="good" name="good" value="good">
+            <label class="form-check-label" for="good">good</label>
+            <br>
+            <input type="checkbox" class="form-check-input" id="well" name="well" value="well">
+            <label class="form-check-label" for="well">well</label>
 
-            <label class="control-label">How do you feel:</label>
-            <repeat group="{{@boxs}}" value="{{@box}}">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="{{@box}}"
-                    name="boxs[]" value="{{@box}}">
-                    <label class="form-check-label" for="{{@box}}">{{@box}}</label>
-                </div>
-
-            </repeat>
             <span class="err">
-                        <check if="{{ isset(@errors['name']) }}">
-                            {{ @errors['boxs'] }}
+                        <check if="{{ isset(@errors['choose']) }}">
+                            {{ @errors['choose'] }}
                         </check>
                     </span>
         </div>

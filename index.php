@@ -37,14 +37,26 @@ $f3->route('GET|POST /survery', function () use ($f3) {
 //            $f3->set('errors["boxs"]', "must choose one");
 //
 //        }
-
+        //if(!in_array($_POST['boxs[]'],$boxs)){
+//        if(isset($_POST['boxs[]'])){
+//            $f3->set('errors["boxs"]', "must choose one");
+//        }
+        if($_POST['nice']=="" && $_POST['good']=="" && $_POST['well']==""){
+            $f3->set('errors["choose"]', "must choose one");
+        }
         if (empty($f3->get('errors'))) {
             $_SESSION['name'] = $_POST['name'];
-            $_SESSION['boxs'] = $_POST['boxs'];
+//            $_SESSION['boxs'] = $_POST['boxs'];
+            $_SESSION['nice'] = $_POST['nice'];
+            $_SESSION['good'] = $_POST['good'];
+            $_SESSION['well'] = $_POST['well'];
             $f3->reroute('summary');
         }
     }
+
     $f3->set('boxs',$boxs);
+    $f3->set('name',$_POST['name']);
+
     $view = new Template();
     echo $view->render('views/survery.html');
 });
